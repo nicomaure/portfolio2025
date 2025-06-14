@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Nicolas Maure</title>
+    <title>Portafolio de Nicolás Maure</title>
     <!-- Google Fonts: Outfit para un estilo moderno y legible -->
-    <link href="[https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap](https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap)" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN para un desarrollo de estilos rápido y responsive -->
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome para iconos atractivos y modernos -->
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css)"crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
     <style>
         /* Definición de variables CSS para la paleta de colores */
         :root {
@@ -37,6 +37,8 @@
         /* Efecto de texto degradado para el nombre principal */
         .gradient-text {
             background: linear-gradient(90deg, var(--primary) 0%, var(--highlight) 100%);
+            -webkit-background-clip: text; /* Propiedad esencial para recortar el fondo al texto */
+            background-clip: text; /* Estándar para recortar el fondo al texto */
             -webkit-text-fill-color: transparent;
         }
 
@@ -138,18 +140,18 @@
         <p class="text-2xl text-subtext mt-2 animate-fadeIn-delay-1">Docente · Programador · Linux User </p>
     </header>
 
-    
+    <!-- Barra de navegación principal -->
     <nav class="text-center mb-10 px-4">
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 font-semibold text-highlight text-xl animate-fadeIn-delay-1">
             <!-- Enlaces de navegación con iconos y efectos hover para una mejor interacción -->
             <a href="https://github.com/nicomaure" target="_blank" class="hover:text-accent border-b-2 border-transparent hover:border-accent pb-2 transition-all duration-300 flex items-center">
                 <i class="fas fa-folder-open mr-3"></i>Proyectos
             </a>
-            <!-- contacto
-            <a href="#contacto" class="hover:text-accent border-b-2 border-transparent hover:border-accent pb-2 transition-all duration-300 flex items-center">
+            <!-- contacto -->
+            <!-- <a href="#contacto" class="hover:text-accent border-b-2 border-transparent hover:border-accent pb-2 transition-all duration-300 flex items-center">
                 <i class="fas fa-envelope mr-3"></i>Contacto
-            </a>
-            -->
+            </a> -->
+            
             <a href="https://github.com/nicomaure?tab=repositories" target="_blank" rel="noopener noreferrer" class="hover:text-accent border-b-2 border-transparent hover:border-accent pb-2 transition-all duration-300 flex items-center">
                 <i class="fab fa-github mr-3"></i>GitHub
             </a>
@@ -224,7 +226,7 @@
                     <a href="nicomau@gmail.com" target="_blank" class="bg-primary text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-highlight transition-colors duration-300 shadow-md hover:shadow-xl flex items-center">
                         <i class="fas fa-envelope mr-3"></i> Enviar Email
                     </a>
-                     -->
+                      -->
                     <!-- Botón de LinkedIn -->
                     <a href="https://www.linkedin.com/in/nicomaure" target="_blank" rel="noopener noreferrer" class="bg-[#0A66C2] text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-[#084A8E] transition-colors duration-300 shadow-md hover:shadow-xl flex items-center">
                         <i class="fab fa-linkedin mr-3"></i> LinkedIn
