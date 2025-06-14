@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Nicolas Maure</title>
+    <!-- Google Fonts: Outfit para un estilo moderno y legible -->
+    <link href="[https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap](https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap)" rel="stylesheet">
+    <!-- Tailwind CSS CDN para un desarrollo de estilos rápido y responsive -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <!-- Font Awesome para iconos atractivos y modernos -->
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css)">
+    <style>
+        /* Definición de variables CSS para la paleta de colores */
+        :root {
+            --primary: #0ea5e9; /* Un azul vibrante para elementos clave */
+            --background-start: #0f172a; /* Azul oscuro para el inicio del gradiente */
+            --background-end: #1e293b; /* Azul más claro para el final del gradiente */
+            --card-bg: #1e293b; /* Fondo de las tarjetas, similar al final del gradiente */
+            --text: #f1f5f9; /* Color de texto principal (blanco casi puro) */
+            --subtext: #94a3b8; /* Color de texto secundario (gris claro) */
+            --highlight: #38bdf8; /* Un azul más brillante para destacar */
+            --accent: #14b8a6; /* Un verde azulado para acentos y hover */
+            --glow-color: rgba(56, 189, 248, 0.6); /* Color para efectos de brillo */
+        }
+
+        /* Estilos básicos para el cuerpo, aplicando la fuente y el gradiente de fondo */
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(to bottom right, var(--background-start), var(--background-end)); /* Gradiente diagonal para un look más dinámico */
+            scroll-behavior: smooth; /* Habilita el desplazamiento suave al hacer clic en los enlaces de navegación */
+            color: var(--text); /* Color de texto predeterminado */
+            /* Espaciado responsivo para el cuerpo */
+            padding: 1rem; /* Padding por defecto para móviles */
+        }
+
+        /* Efecto de texto degradado para el nombre principal */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--highlight) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Efecto de brillo sutil para elementos importantes */
+        .glow-effect {
+            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+        }
+
+        /* Animación fadeIn para una entrada suave de los elementos */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Aplicación de la animación con y sin retraso para un efecto escalonado */
+        .animate-fadeIn { animation: fadeIn 1s ease-in-out; }
+        .animate-fadeIn-delay-1 { animation: fadeIn 1.2s ease-in-out; }
+        .animate-fadeIn-delay-2 { animation: fadeIn 1.4s ease-in-out; }
+
+        /* Estilos para el borde brillante de las tarjetas al pasar el ratón */
+        .card-border-glow {
+            position: relative;
+            z-index: 1;
+            overflow: hidden; /* Necesario para contener el pseudo-elemento */
+            transition: box-shadow 0.3s ease, transform 0.3s ease; /* Añadir transición para la sombra */
+        }
+        .card-border-glow::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, rgba(20, 184, 166, 0) 0%, rgba(20, 184, 166, 0.8) 50%, rgba(20, 184, 166, 0) 100%); /* Degradado cónico para el efecto de barrido */
+            border-radius: inherit;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            opacity: 0;
+            transform: rotate(0deg);
+            z-index: -1;
+        }
+        .card-border-glow:hover::before {
+            transform: rotate(360deg);
+            opacity: 1;
+        }
+        /* Capa adicional para el efecto de borde brillante sobre el contenido de la tarjeta */
+        .card-border-glow::after {
+            content: '';
+            position: absolute;
+            top: 2px; /* Ajusta el grosor del borde */
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background-color: var(--card-bg); /* Mismo color de fondo de la tarjeta */
+            border-radius: inherit;
+            z-index: -1;
+        }
+        /* Sombra más pronunciada al pasar el mouse por la tarjeta completa */
+        .card-border-glow:hover {
+            box-shadow: 0 0 30px var(--highlight), 0 0 60px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Estilos para el hover de los títulos de proyecto */
+        .card h3 {
+            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease; /* Transición para color, escala y sombra de texto */
+        }
+        .card:hover h3 {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.3); /* Sombra de texto blanca/clara para resaltar */
+        }
+    </style>
+    <script>
+        // Configuración de Tailwind para extender los colores predeterminados
+        // Se asegura que los colores personalizados estén disponibles como clases de Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'var(--primary)',
+                        cardBg: 'var(--card-bg)',
+                        text: 'var(--text)',
+                        subtext: 'var(--subtext)',
+                        highlight: 'var(--highlight)',
+                        accent: 'var(--accent)',
+                    },
+                    boxShadow: {
+                        'custom-glow': '0 0 15px var(--highlight)', /* Sombra personalizada para un efecto de brillo */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col justify-between sm:p-8 md:p-12 lg:p-16">
+    <!-- Encabezado principal del portafolio -->
+    <header class="text-center mb-12 py-8 px-4 animate-fadeIn">
+        <h1 class="text-6xl md:text-7xl font-extrabold mb-2 relative gradient-text glow-effect">
+            Nicolás Maure
+            <!-- Efecto de texto fantasma/traslucido detrás del nombre para un toque visual -->
+            <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 text-8xl md:text-9xl font-black -z-10 select-none opacity-50">PORTFOLIO</span>
+        </h1>
+        <p class="text-2xl text-subtext mt-2 animate-fadeIn-delay-1">Docente · Programador · Linux User </p>
+    </header>
+
+    
+    <nav class="text-center mb-10 px-4">
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 font-semibold text-highlight text-xl animate-fadeIn-delay-1">
+            <!-- Enlaces de navegación con iconos y efectos hover para una mejor interacción -->
+            <a href="https://github.com/nicomaure" target="_blank" class="hover:text-accent border-b-2 border-transparent hover:border-accent pb-2 transition-all duration-300 flex items-center">
+                <i class="fas fa-folder-open mr-3"></i>Proyectos
+            </a>
+            <!-- contacto
+            <a href="#contacto" class="hover:text-accent border-b-2 border-transparent hover:border-accent pb-2 transition-all duration-300 flex items-center">
+                <i class="fas fa-envelope mr-3"></i>Contacto
+            </a>
+            -->
+            <a href="https://github.com/nicomaure?tab=repositories" target="_blank" rel="noopener noreferrer" class="hover:text-accent border-b-2 border-transparent hover:border-accent pb-2 transition-all duration-300 flex items-center">
+                <i class="fab fa-github mr-3"></i>GitHub
+            </a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal del portafolio -->
+    <main class="max-w-7xl mx-auto px-4 flex-grow">
+        <!-- Sección de Proyectos -->
+        <section id="proyectos" class="mb-16">
+            <h2 class="text-4xl font-bold text-primary mb-10 text-center animate-fadeIn-delay-2">Mis Proyectos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fadeIn-delay-2">
+                <!-- Tarjeta de Proyecto: CV Online -->
+                <div class="bg-cardBg rounded-xl shadow-lg p-6 transform hover:scale-103 transition-all duration-300 card-border-glow group">
+                    <h3 class="text-2xl font-semibold text-primary mb-2 group-hover:text-highlight group-hover:scale-105 transition-all duration-300">CV Online</h3>
+                    <p class="text-subtext mb-4">Mi currículum digital en formato web, una herramienta interactiva para presentar mi trayectoria profesional.</p>
+                    <!-- NOTA: Reemplaza 'javascript:void(0);' con la URL real de tu proyecto -->
+                    <a href="https://nicomaure.github.io/cvmaure/" target="_blank" class="inline-block text-highlight font-bold hover:underline flex items-center group-hover:text-accent transition-colors duration-300">
+                        Ver proyecto <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1 duration-300"></i>
+                    </a>
+                </div>
+
+                <!-- Tarjeta de Proyecto: Google Drive + IA -->
+                <div class="bg-cardBg rounded-xl shadow-lg p-6 transform hover:scale-103 transition-all duration-300 card-border-glow group">
+                    <h3 class="text-2xl font-semibold text-primary mb-2 group-hover:text-highlight group-hover:scale-105 transition-all duration-300">Google Drive + IA</h3>
+                    <p class="text-subtext mb-4">Un proyecto educativo innovador diseñado para estudiantes de 1.º y 2.º año, integrando inteligencia artificial.</p>
+                    <!-- NOTA: Reemplaza 'javascript:void(0);' con la URL real de tu proyecto -->
+                    <a href="https://nicomaure.github.io/4232google" target="_blank" class="inline-block text-highlight font-bold hover:underline flex items-center group-hover:text-accent transition-colors duration-300">
+                        Ver proyecto <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1 duration-300"></i>
+                    </a>
+                </div>
+
+                <!-- Tarjeta de Proyecto: Netbell Web -->
+                <div class="bg-cardBg rounded-xl shadow-lg p-6 transform hover:scale-103 transition-all duration-300 card-border-glow group">
+                    <h3 class="text-2xl font-semibold text-primary mb-2 group-hover:text-highlight group-hover:scale-105 transition-all duration-300">Netbell Web</h3>
+                    <p class="text-subtext mb-4">Landing page ficticia diseñada para promocionar servicios de seguridad, con imágenes generadas mediante inteligencia artificial.</p>
+                    <!-- NOTA: Reemplaza 'javascript:void(0);' con la URL real de tu proyecto -->
+                    <a href="javascript:void(0);" class="inline-block text-highlight font-bold hover:underline flex items-center group-hover:text-accent transition-colors duration-300">
+                        Ver proyecto <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1 duration-300"></i>
+                    </a>
+                </div>
+
+                <!-- Tarjeta de Proyecto: Escuela Teresa Ghilardi -->
+                <div class="bg-cardBg rounded-xl shadow-lg p-6 transform hover:scale-103 transition-all duration-300 card-border-glow group">
+                    <h3 class="text-2xl font-semibold text-primary mb-2 group-hover:text-highlight group-hover:scale-105 transition-all duration-300">Escuela Teresa Ghilardi</h3>
+                    <p class="text-subtext mb-4">Sitio web institucional completo para la Escuela Secundaria Nº 4-232, mejorando su presencia digital usando google sites.</p>
+                    <!-- NOTA: Reemplaza 'javascript:void(0);' con la URL real de tu proyecto -->
+                    <a href="https://sites.google.com/mendoza.edu.ar/teresaghilardi" target="_blank" class="inline-block text-highlight font-bold hover:underline flex items-center group-hover:text-accent transition-colors duration-300">
+                        Ver proyecto <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1 duration-300"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Contacto -->
+        <section id="contacto" class="mb-16 text-center">
+            <h2 class="text-4xl font-bold text-primary mb-8 animate-fadeIn-delay-2">Contacto</h2>
+            <div class="bg-cardBg rounded-xl shadow-lg p-8 max-w-xl mx-auto transform hover:scale-102 transition-transform duration-300">
+                <p class="text-xl text-subtext mb-6">¿Interesado en colaborar o simplemente saludar? ¡No dudes en contactarme!</p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- Botón de Email
+                    <a href="nicomau@gmail.com" target="_blank" class="bg-primary text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-highlight transition-colors duration-300 shadow-md hover:shadow-xl flex items-center">
+                        <i class="fas fa-envelope mr-3"></i> Enviar Email
+                    </a>
+                     -->
+                    <!-- Botón de LinkedIn -->
+                    <a href="https://www.linkedin.com/in/nicomaure" target="_blank" rel="noopener noreferrer" class="bg-[#0A66C2] text-white py-3 px-6 rounded-full font-bold text-lg hover:bg-[#084A8E] transition-colors duration-300 shadow-md hover:shadow-xl flex items-center">
+                        <i class="fab fa-linkedin mr-3"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="text-center mt-16 text-subtext text-sm py-4 animate-fadeIn-delay-2">
+        <p>&copy; 2025 Nicolás Maure · Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>
